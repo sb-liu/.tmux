@@ -209,7 +209,6 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{battery_status}
 #     - #{battery_vbar}
 #     - #{circled_session_name}
-#     - #{hostname_ssh}
 #     - #{hostname}
 #     - #{hostname_full}
 #     - #{hostname_full_ssh}
@@ -330,7 +329,7 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g history-limit 10000
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
@@ -338,11 +337,23 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g mode-keys vi
 
 # replace C-b by C-a instead of using both prefixes
-# set -gu prefix2
-# unbind C-a
-# unbind C-b
-# set -g prefix C-a
-# bind C-a send-prefix
+set -gu prefix2
+unbind C-a
+unbind C-b
+set -g prefix C-v
+bind C-v send-prefix
+
+# pane navigationin
+bind -r j select-pane -L  # move left
+bind -r k select-pane -D  # move down
+bind -r l select-pane -U  # move up
+bind -r "'" select-pane -R  # move right
+
+# pane resizing
+bind -r J resize-pane -L 2
+bind -r K resize-pane -D 2
+bind -r L resize-pane -U 2
+bind -r '"' resize-pane -R 2
 
 # move status line to top
 #set -g status-position top
